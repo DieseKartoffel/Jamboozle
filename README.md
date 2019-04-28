@@ -1,4 +1,8 @@
-# COMING SOON
+# Jamboozle
+
+Coming soon
+
+Visit https://jamboozle.tk/
 
 One Paragraph of project description goes here
 
