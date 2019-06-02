@@ -1,0 +1,2 @@
+gradlew signingReport
+for SHA1, add in https://developer.spotify.com/dashboard/applications/63b7692b4ab646b9bfa075ff6990673d
