@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.example.kartoffel.playlisttogether.ClientServerbrowsingActivity;
+import com.example.kartoffel.playlisttogether.ServerbrowsingActivity;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -25,7 +25,7 @@ public class Serverfinder extends Thread {
     ArrayList<String> connectedUsers = new ArrayList<String>();
     ArrayList<String> ipAdresses = new ArrayList<String>();
 
-    public static Serverfinder getServerfinder(ClientServerbrowsingActivity act) {
+    public static Serverfinder getServerfinder(ServerbrowsingActivity act) {
         if (serverfinder != null) {
             serverfinder.interrupt();
         }
@@ -35,9 +35,9 @@ public class Serverfinder extends Thread {
 
 
     private DatagramSocket socket = null;
-    private ClientServerbrowsingActivity act;
+    private ServerbrowsingActivity act;
 
-    public Serverfinder(ClientServerbrowsingActivity act) {
+    public Serverfinder(ServerbrowsingActivity act) {
         this.act = act;
         servernames.clear();
         connectedUsers.clear();
@@ -164,7 +164,6 @@ public class Serverfinder extends Thread {
             }
 
         }
-
     }
 }
 

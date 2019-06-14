@@ -49,6 +49,7 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.5"
     implementation "org.apache.httpcomponents:httpcore:4.4.10"
     implementation "org.apache.httpcomponents:httpclient:4.5"
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 
 
 }

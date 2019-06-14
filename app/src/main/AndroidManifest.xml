@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HostSetupActivity" />
-        <activity android:name=".ClientServerbrowsingActivity" />
+        <activity android:name=".ServerbrowsingActivity" />
         <activity android:name=".PlayerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

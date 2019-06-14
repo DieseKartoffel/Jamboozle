@@ -15,11 +15,11 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.kartoffel.playlisttogether.local.client.Serverfinder;
-
 import java.util.ArrayList;
 
-public class ClientServerbrowsingActivity extends AppCompatActivity {
+public class ServerbrowsingActivity extends AppCompatActivity {
+
+    ServerbrowsingActivity myself = this; //reference for method calls in APIcommunication
 
     ArrayList<String> servernames;
     ArrayList<String> connectedUsers;
@@ -28,31 +28,24 @@ public class ClientServerbrowsingActivity extends AppCompatActivity {
     ListView serverListView;
     ListitemAdapter adapter;
 
-    Serverfinder serverfinder;
-
+    SearchAnimationThread anim;
 
     @Override
     public void onResume(){
+        APIcommunication.updateServers(myself); //will call updateServerList in this class
         super.onResume();
-        serverfinder = Serverfinder.getServerfinder(ClientServerbrowsingActivity.this);
-        serverfinder.start();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_serverbrowsing);
+        setContentView(R.layout.activity_serverbrowsing);
 
        servernames = new ArrayList<String>();
        connectedUsers = new ArrayList<String>();
        ipAdresses = new ArrayList<String>();
 
-        //Listeing for Broadcasting Servers Thread, add them to list
-        Log.e("Browser", "NEW SERVERFINDER");
-        serverfinder = Serverfinder.getServerfinder(this);
-        serverfinder.start();
-
-              //List Item
+        //List Item
         serverListView = (ListView) findViewById(R.id.serverList);
         adapter = new ListitemAdapter(this);
         serverListView.setAdapter(adapter);
@@ -62,21 +55,19 @@ public class ClientServerbrowsingActivity extends AppCompatActivity {
                 //Click on a Server
                 Log.d("Item Click","Clicked Pos: " + position + " ("+servernames.get(position)+") ID: " + id);
                 if(position == 0){
-                    // serverfinder.interrupt();
-                    Intent hostSetup = new Intent(ClientServerbrowsingActivity.this, HostSetupActivity.class);
+                    Intent hostSetup = new Intent(ServerbrowsingActivity.this, HostSetupActivity.class);
                     startActivity(hostSetup);
                     return;
                 }
                 if(position == servernames.size() - 1){
-                    serverfinder = Serverfinder.getServerfinder(ClientServerbrowsingActivity.this);
-                    serverfinder.start();
+                    APIcommunication.updateServers(myself); //will call updateServerList in this class
                     return;
                 }
                 else{
                     // serverfinder.interrupt();
 
                     //Room Activity that will then connect to server - Same activity as HostServer but Hostflag set to false
-                    Intent joinServer = new Intent(ClientServerbrowsingActivity.this, PlayerActivity.class);
+                    Intent joinServer = new Intent(ServerbrowsingActivity.this, PlayerActivity.class);
                     joinServer.putExtra("IpAdress", ipAdresses.get(position));
                     joinServer.putExtra("HostRoom", false);
                     startActivity(joinServer);
@@ -86,6 +77,19 @@ public class ClientServerbrowsingActivity extends AppCompatActivity {
             }
         });
 
+        servernames.add("Create New Room");
+        connectedUsers.add("Click here to host a fresh Jamboozle!");
+        ipAdresses.add("Create New Room");
+
+        servernames.add("Searching...");
+        connectedUsers.add("Looking for Jamboozles to join!");
+        ipAdresses.add("null");
+        anim = new SearchAnimationThread();
+        anim.start();
+
+
+        //Listeing for Broadcasting Servers Thread, add them to list
+        Log.e("Browser", "Looking for Servers");
     }
 
     public void updateServerlist(ArrayList<String> servernames, ArrayList<String> connectedUsers, ArrayList<String> ipAdresses) {
@@ -140,6 +144,33 @@ public class ClientServerbrowsingActivity extends AppCompatActivity {
             connectedUsersView.setText(connectedUsers.get(position));
 
             return view;
+        }
+    }
+
+    class SearchAnimationThread extends Thread {
+        @Override
+        public void run() {
+            Log.d("Serverfinder","Thread started (Animation)");
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    servernames.remove(servernames.size() - 1);
+                    servernames.add("Searching.");
+                    updateServerlist(servernames, connectedUsers, ipAdresses);
+                    Thread.sleep(1000);
+                    servernames.remove(servernames.size() - 1);
+                    servernames.add("Searching..");
+                    updateServerlist(servernames, connectedUsers, ipAdresses);
+                    Thread.sleep(1000);
+                    servernames.remove(servernames.size() - 1);
+                    servernames.add("Searching...");
+                    updateServerlist(servernames, connectedUsers, ipAdresses);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Log.d("Serverfinder", "Thread interrupted (Animation)");
+                    return;
+                }
+            }
+
         }
     }
 }
