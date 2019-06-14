@@ -1,11 +1,9 @@
-package com.example.kartoffel.playlisttogether.client;
+package com.example.kartoffel.playlisttogether.local.client;
 
-import android.app.Activity;
 import android.util.Log;
 
 import com.example.kartoffel.playlisttogether.PlayerActivity;
 import com.example.kartoffel.playlisttogether.Protocol;
-import com.example.kartoffel.playlisttogether.server.Server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

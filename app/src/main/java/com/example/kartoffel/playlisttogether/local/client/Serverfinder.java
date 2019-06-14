@@ -1,4 +1,4 @@
-package com.example.kartoffel.playlisttogether.client;
+package com.example.kartoffel.playlisttogether.local.client;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

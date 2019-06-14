@@ -14,9 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.kartoffel.playlisttogether.client.Serverconnection;
-import com.example.kartoffel.playlisttogether.client.Serverfinder;
-import com.example.kartoffel.playlisttogether.server.Server;
+import com.example.kartoffel.playlisttogether.local.client.Serverconnection;
+import com.example.kartoffel.playlisttogether.local.server.Server;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;

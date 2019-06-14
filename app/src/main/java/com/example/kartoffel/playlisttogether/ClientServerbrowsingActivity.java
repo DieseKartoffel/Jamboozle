@@ -15,7 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.kartoffel.playlisttogether.client.Serverfinder;
+import com.example.kartoffel.playlisttogether.local.client.Serverfinder;
 
 import java.util.ArrayList;
 

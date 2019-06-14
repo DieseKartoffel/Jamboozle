@@ -1,4 +1,4 @@
-package com.example.kartoffel.playlisttogether.server;
+package com.example.kartoffel.playlisttogether.local.server;
 
 import android.app.Activity;
 import android.net.DhcpInfo;
@@ -7,8 +7,6 @@ import android.net.wifi.WifiManager;
 import android.text.format.Formatter;
 import android.util.Log;
 
-import com.example.kartoffel.playlisttogether.MainActivity;
-import com.example.kartoffel.playlisttogether.PlayerActivity;
 import com.example.kartoffel.playlisttogether.Protocol;
 
 import java.io.IOException;

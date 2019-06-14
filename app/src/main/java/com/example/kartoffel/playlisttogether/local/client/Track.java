@@ -1,4 +1,4 @@
-package com.example.kartoffel.playlisttogether.client;
+package com.example.kartoffel.playlisttogether.local.client;
 
 public class Track {
 

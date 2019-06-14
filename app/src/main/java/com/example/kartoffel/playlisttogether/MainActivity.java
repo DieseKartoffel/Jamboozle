@@ -51,37 +51,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        premiumInput = (TextView) findViewById(R.id.premiumPassword);
-        enableButton = (Button) findViewById(R.id.premium_enable);
-
-        enableButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(premiumInput.getText().length() < 1){
-                    return;
-                }
-
-                Protocol.setPremiumKey(premiumInput.getText().toString());
-
-                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                alertDialog.setTitle("Premium Key Configured!");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok cool",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-
-                                //clear text and dismiss keyboard
-                                premiumInput.setText("");
-                                premiumInput.clearFocus();
-                                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(premiumInput.getWindowToken(), 0);
-
-                            }
-                        });
-                alertDialog.show();
-            }
-        });
-
-
     }
 }

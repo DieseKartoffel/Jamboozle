@@ -1,4 +1,4 @@
-package com.example.kartoffel.playlisttogether.server;
+package com.example.kartoffel.playlisttogether.local.server;
 
 import android.util.Log;
 
